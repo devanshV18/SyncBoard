@@ -3,6 +3,7 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import Button from '../../_components/Button'
 import Input from '../../_components/Input'
+import CoverPicker from '../../_components/CoverPicker'
 import { SmilePlus } from 'lucide-react'
 
 function CreateWorkspace() {
@@ -15,23 +16,26 @@ function CreateWorkspace() {
       
       <div className='shadow-2xl rounded-xl'>
         {/* CoverImage */}
-        <div className='relative group cursor-pointer'>
 
-          <h2 
-          className='hidden absolute p-4 w-full h-full group-hover:flex items-center justify-center text-xl font-medium'
-          >
-            Change Cover
-          </h2>
+        <CoverPicker>
+            <div className='relative group cursor-pointer'>
 
-          <div className='group-hover:opacity-60'>
-            <Image src={coverImage} width={400} height={400}
-              className='w-full h-[150px] object-cover rounded-t-xl'
-              alt='cover image'
-            />
-          </div>
+              <h2 
+              className='hidden absolute p-4 w-full h-full group-hover:flex items-center justify-center text-xl font-medium'
+              >
+                Change Cover
+              </h2>
 
-        </div>
+              <div className='group-hover:opacity-60'>
+                <Image src={coverImage} width={400} height={400}
+                  className='w-full h-[150px] object-cover rounded-t-xl'
+                  alt='cover image'
+                />
+              </div>
 
+            </div>
+        </CoverPicker>
+        
         {/* Input section */}
 
         <div className='p-12'>
