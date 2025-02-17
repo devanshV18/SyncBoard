@@ -5,13 +5,39 @@ import Button from '../../_components/Button'
 import Input from '../../_components/Input'
 import EmojiPickerComponent from '../../_components/EmojiPickerComponent'
 import CoverPicker from '../../_components/CoverPicker'
-import { SmilePlus } from 'lucide-react'
+import { Loader2Icon, SmilePlus } from 'lucide-react'
+import {db} from '../../../config/firebase.config'
+import {doc, setDoc} from 'firebase/firestore'
+import { useUser } from '@clerk/nextjs'
+import { useAuth } from '@clerk/clerk-react'
 
 function CreateWorkspace() {
 
   const [coverImage, setCoverImage] = useState('/covern.png')
   const [workspaceName, setWorkspaceName] = useState()
   const [emoji, setEmoji] = useState()
+  const {user} = useUser()
+  const {orgId} = useAuth()
+  const [loading, setLoading] = useState(false)
+
+
+
+  // function to create a new workspace document and save it to firebase to fetch and create new and further pages
+  const onCreateWorkspace = async () => {
+    setLoading(true)
+    const docId = Date.now()
+    const result = await setDoc(doc(db, 'Workspace', docId.toString()), {
+      name: workspaceName,
+      emoji: emoji,
+      coverImage: coverImage,
+      createdBy: user?.primaryEmailAddress?.emailAddress,
+      id: docId,
+      orgId: orgId?orgId:user?.primaryEmailAddress?.emailAddress
+    })
+
+    setLoading(false)
+    console.log("Data Inserted")
+  }
 
   return (
     <div className='p-10 md:px-36 lg:px-64 xl:px-96 py-28'>
@@ -62,8 +88,13 @@ function CreateWorkspace() {
           </div>
 
           <div className='mt-7 flex justify-end gap-6'>
-            <Button disabled={!workspaceName?.length} variant="default">
-              Create
+            <Button 
+            disabled={!workspaceName?.length} 
+            variant="default"
+            onClick={onCreateWorkspace}
+
+            >
+              Create {loading && <Loader2Icon className='animate-spin ml-2'/>}
             </Button>
             <Button variant="outline">
               Cancel
