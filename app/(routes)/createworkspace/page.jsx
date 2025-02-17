@@ -10,6 +10,7 @@ import {db} from '../../../config/firebase.config'
 import {doc, setDoc} from 'firebase/firestore'
 import { useUser } from '@clerk/nextjs'
 import { useAuth } from '@clerk/clerk-react'
+import { useRouter } from 'next/navigation'
 
 function CreateWorkspace() {
 
@@ -19,6 +20,8 @@ function CreateWorkspace() {
   const {user} = useUser()
   const {orgId} = useAuth()
   const [loading, setLoading] = useState(false)
+
+  const router = useRouter()
 
 
 
@@ -41,7 +44,7 @@ function CreateWorkspace() {
     })
 
     setLoading(false)
-    console.log("Data Inserted")
+    router.replace('/workspace/'+docId)
   }
 
   return (
