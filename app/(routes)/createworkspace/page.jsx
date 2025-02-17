@@ -26,13 +26,18 @@ function CreateWorkspace() {
   const onCreateWorkspace = async () => {
     setLoading(true)
     const docId = Date.now()
+
+    console.log("user", user)
+    console.log("orgId", orgId)
+    console.log("docid", docId)
+    
     const result = await setDoc(doc(db, 'Workspace', docId.toString()), {
       name: workspaceName,
       emoji: emoji,
       coverImage: coverImage,
-      createdBy: user?.primaryEmailAddress?.emailAddress,
+      createdBy: user ? user?.primaryEmailAddress?.emailAddress : 'Anonymous',
       id: docId,
-      orgId: orgId?orgId:user?.primaryEmailAddress?.emailAddress
+      orgId: orgId ? orgId : user?.primaryEmailAddress?.emailAddress
     })
 
     setLoading(false)
