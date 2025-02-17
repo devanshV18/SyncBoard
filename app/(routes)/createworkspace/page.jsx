@@ -3,6 +3,7 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import Button from '../../_components/Button'
 import Input from '../../_components/Input'
+import EmojiPickerComponent from '../../_components/EmojiPickerComponent'
 import CoverPicker from '../../_components/CoverPicker'
 import { SmilePlus } from 'lucide-react'
 
@@ -10,6 +11,7 @@ function CreateWorkspace() {
 
   const [coverImage, setCoverImage] = useState('/covern.png')
   const [workspaceName, setWorkspaceName] = useState()
+  const [emoji, setEmoji] = useState()
 
   return (
     <div className='p-10 md:px-36 lg:px-64 xl:px-96 py-28'>
@@ -47,9 +49,11 @@ function CreateWorkspace() {
           </h2>
 
           <div className='mt-8 flex gap-2 items-center'>
-            <Button variant="outline">
-              <SmilePlus/>
-            </Button>
+            <EmojiPickerComponent setEmojiIcon={(v) => setEmoji(v)}>
+              <Button variant="outline">
+                {emoji ? emoji : <SmilePlus/>}
+              </Button>
+            </EmojiPickerComponent>
             <Input 
             placeholder="workspace name"
             className="placeholder:font-semibold border p-2 rounded-md"
