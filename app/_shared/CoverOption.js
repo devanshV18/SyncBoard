@@ -38,8 +38,11 @@ export default[
     {
         imageUrl:'https://img.freepik.com/free-photo/minimalist-colorful-3d-lines-background_1409-4965.jpg?t=st=1721822568~exp=1721826168~hmac=63610a79e449250105959bd41a3af2f9018622345d71625821a1d1affaf510fa&w=2000'
     },
+    
     {
-        imageUrl:'https://img.freepik.com/free-photo/seamless-abstract-pattern-design_23-2151179146.jpg?ga=GA1.1.1679917421.1705195646&semt=ais_user_ai_gen'
+        imageUrl:'https://img.freepik.com/free-photo/flowing-purple-mountain-spiral-bright-imagination-generated-by-ai_188544-9853.jpg?ga=GA1.1.296909917.1739764514&semt=ais_hybrid'
+    },
+    {
+        imageUrl: 'https://img.freepik.com/premium-photo/abstract-flame-backdrop-multi-colored-motion-generated-by-ai_188544-15759.jpg?w=1380'
     }
-
 ]

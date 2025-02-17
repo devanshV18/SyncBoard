@@ -17,7 +17,7 @@ function CreateWorkspace() {
       <div className='shadow-2xl rounded-xl'>
         {/* CoverImage */}
 
-        <CoverPicker>
+        <CoverPicker setNewCover={(v) =>setCoverImage(v) }>
             <div className='relative group cursor-pointer'>
 
               <h2 
@@ -28,7 +28,7 @@ function CreateWorkspace() {
 
               <div className='group-hover:opacity-60'>
                 <Image src={coverImage} width={400} height={400}
-                  className='w-full h-[150px] object-cover rounded-t-xl'
+                  className='w-full h-[180px] object-cover rounded-t-xl'
                   alt='cover image'
                 />
               </div>
