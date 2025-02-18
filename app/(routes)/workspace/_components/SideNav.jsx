@@ -9,9 +9,9 @@ import React, { useEffect } from 'react'
 
 function SideNav() {
     const params = useParams()
-
+    console.log(params)
     useEffect(() => {
-        if(params?.workspaceid){
+        if(params?.workspaceId){
             getDocumentList()
         }
     },[params])
@@ -19,11 +19,15 @@ function SideNav() {
 
     //used to get latest document list
     const getDocumentList = () => {
+        console.log("inside fxn atleast")
         const q = query(collection(db, 'workspaceDocuments'), 
         where('workspaceId', '==', Number(params?.workspaceid)))
 
+        console.log("query resolved atleast")
+
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             querySnapshot.forEach((doc) => {
+                console.log("Inside data printing flag")
                 console.log(doc.data())
             })
         })
