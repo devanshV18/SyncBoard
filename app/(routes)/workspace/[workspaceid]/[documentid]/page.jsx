@@ -1,9 +1,21 @@
-import React from 'react'
+"use client"
+import React, { useEffect } from 'react'
+import SideNav from '../../_components/SideNav'
+
 
 function WorkspaceDocument() {
+
   return (
     <div>
-      Workspace Document
+      {/* sidenavv */}
+      <div className=''>
+        <SideNav/>
+      </div>
+
+      {/* docuemnt */}
+      <div className='md:ml-72'>
+        Documents
+      </div>
     </div>
   )
 }
