@@ -11,6 +11,7 @@ import {doc, setDoc} from 'firebase/firestore'
 import { useUser } from '@clerk/nextjs'
 import { useAuth } from '@clerk/clerk-react'
 import { useRouter } from 'next/navigation'
+import uuid4 from "uuid4"
 
 function CreateWorkspace() {
 
@@ -28,23 +29,37 @@ function CreateWorkspace() {
   // function to create a new workspace document and save it to firebase to fetch and create new and further pages
   const onCreateWorkspace = async () => {
     setLoading(true)
-    const docId = Date.now()
+    const workspaceId = Date.now()
 
     console.log("user", user)
     console.log("orgId", orgId)
-    console.log("docid", docId)
     
-    const result = await setDoc(doc(db, 'Workspace', docId.toString()), {
+    const result = await setDoc(doc(db, 'Workspace', workspaceId.toString()), {
       name: workspaceName,
       emoji: emoji,
       coverImage: coverImage,
       createdBy: user ? user?.primaryEmailAddress?.emailAddress : 'Anonymous',
-      id: docId,
+      id: workspaceId,
       orgId: orgId ? orgId : user?.primaryEmailAddress?.emailAddress
     })
 
+    const docId = uuid4()
+    await setDoc(doc(db, 'workspaceDocuments', docId.toString()), {
+      workspaceId: workspaceId,
+      createdBy: user ? user?.primaryEmailAddress?.emailAddress : 'Anonymous',
+      coverImage: null,
+      emoji: null,
+      id: docId,
+      documentOutput: []
+    })
+
+    await setDoc(doc(db, 'documentOutput', docId.toString()), {
+      docId: docId,
+      output: []
+    })
+
     setLoading(false)
-    router.replace('/workspace/'+docId)
+    router.replace('/workspace/'+docId+"/"+docId)
   }
 
   return (

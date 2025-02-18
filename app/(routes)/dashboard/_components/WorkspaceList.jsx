@@ -26,7 +26,7 @@ function WorkspaceList() {
       <div className='mt-10 flex justify-between'>
         <div>
           <h2 className='font-medium text-primary'>
-            Workspaces
+            Your Workspaces 🏢💻✨
           </h2>
         </div>
 
